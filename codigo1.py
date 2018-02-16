@@ -53,7 +53,7 @@ def moverPersonagem(lado_sai, lado_entra):
 
         alterarTempo(p1, p2)
 
-    return (lado_sai, lado_entra)
+    return (sorted(lado_sai), sorted(lado_entra))
 
 def reiniciarJogo():
     """Função que reinicia as variáveis quando a máquina perde."""
