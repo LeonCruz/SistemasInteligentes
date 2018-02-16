@@ -1,3 +1,5 @@
+"""Código para resolução do jogo "Ponte Escura". """
+
 from random import choice, randint
 
 def alterarTempo(p1, p2=0):
