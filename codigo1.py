@@ -1,4 +1,4 @@
-"""Código para resolução do jogo "Ponte Escura". """
+"""Código para resolução do jogo "Ponte Escura"."""
 
 from random import choice, randint
 
