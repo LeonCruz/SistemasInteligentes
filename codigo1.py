@@ -2,15 +2,14 @@
 
 # Importação das funções necessárias do Python
 from random import choice, randint
-from time import sleep
-import time
+from time import sleep, time
 
 # Declaração das variáveis
 tempo_lamp = 30  # Tempo da lâmpada
 lado_A = [1, 3, 6, 8, 12]  # Lado onde estão as pesssoas
 lado_B = []  # Lado para onde as pesoas vão
 tentativas = 0 # Contador de tentativas até resolver
-tempo_decorrido = time.time() # Registra o tempo inicial
+tempo_decorrido = time() # Registra o tempo inicial
 
 def alterarTempo(p1, p2=0):
     """ Função que altera o tempo baseando-se no personagem
@@ -95,7 +94,7 @@ while True:
 
 
     if tempo_lamp >= 0 and lado_A == []:
-        tempo_decorrido = time.time() - tempo_decorrido
+        tempo_decorrido = time() - tempo_decorrido
         print('\n\n----------FIM DO JOGO!----------')
         print('Numero de tentativas: %d' % tentativas)
         print('O tempo decorrido foi de %.2f segundos' % tempo_decorrido)
