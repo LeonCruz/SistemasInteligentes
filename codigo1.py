@@ -18,6 +18,9 @@ pegar_movimentos = lambda movimento: lista_movimentos.append(movimento)
 """Função anônima para testar se o movimento já foi feito."""
 testar_movimento = lambda movimento: True if movimento in lista_movimentos else False
 
+"""Função anônima para testar a quantidade de elementos do lado B."""
+quantLadoB = lambda lado_B: True if len(lado_B) == 1 else False
+
 def alterarTempo(p1, p2=0):
     """ Função que altera o tempo baseando-se no personagem
         de maior custo."""
@@ -47,30 +50,35 @@ def moverPersonagem(lado_sai, lado_entra):
     if num_escolhas == 1:
         p1 = choice(lado_sai)
 
-        print(testar_movimento([p1]))
+        if testar_movimento([p1]):
+            print('----------Movimento Inválido----------')
+            moverPersonagem(lado_sai, lado_entra)
+        else:
+            lado_sai.remove(p1)
+            lado_entra.append(p1)
+            print('Personagem escolhido: ', p1)
 
-        lado_sai.remove(p1)
-        lado_entra.append(p1)
-        print('Personagem escolhido: ', p1)
+            alterarTempo(p1)
+            pegar_movimentos([p1])
 
-        alterarTempo(p1)
-
-        pegar_movimentos([p1])
     else:
         p1 = choice(lado_sai)
         lado_sai.remove(p1)
         p2 = choice(lado_sai)
-        lado_sai.remove(p2)
 
-        print(testar_movimento([p1, p2]))
+        if testar_movimento([p1, p2]):
+            print('----------Movimento Inválido----------')
+            lado_sai.append(p1)
+            moverPersonagem(lado_sai, lado_entra)
+        else:
+            lado_sai.remove(p2)
+            lado_entra.append(p1)
+            lado_entra.append(p2)
+            print('Personagens escolhidos: ', p1, ' e ', p2)
 
-        lado_entra.append(p1)
-        lado_entra.append(p2)
-        print('Personagens escolhidos: ', p1, ' e ', p2)
+            alterarTempo(p1, p2)
 
-        alterarTempo(p1, p2)
-
-        pegar_movimentos(sorted([p1, p2]))
+            pegar_movimentos(sorted([p1, p2]))
 
     return (sorted(lado_sai), sorted(lado_entra))
 
