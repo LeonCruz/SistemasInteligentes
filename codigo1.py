@@ -8,20 +8,17 @@ from time import sleep, time
 tempo_lamp = 30  # Tempo da lâmpada
 lado_A = [1, 3, 6, 8, 12]  # Lado onde estão as pesssoas
 lado_B = []  # Lado para onde as pesoas vão
-tentativas = 0 # Contador de tentativas até resolver
+num_tentativas = 0 # Contador de tentativas até resolver
+
+num_movimento = 0
+
 tempo_decorrido = time() # Registra o tempo inicial
-lista_movimentos = [] # Lista que irá armazenar todos os movimentos da máquina
-
-"""Função anônima que salva em uma lista os movimentos da máquina."""
-pegar_movimentos = lambda movimento: lista_movimentos.append(movimento)
-
-"""Função anônima para testar se o movimento já foi feito."""
-testar_movimento = lambda movimento: True if movimento in lista_movimentos else False
+ganhou = False #Verifica se ganhou
 
 def alterarTempo(p1, p2=0):
     """ Função que altera o tempo baseando-se no personagem
         de maior custo."""
-    global tempo_lamp
+   global tempo_lamp
 
     if p1 > p2:
         tempo_lamp -= p1
@@ -37,7 +34,7 @@ def quantEscolha(lado):
         num_escolhas =  randint(1, 2)
 
     return num_escolhas
-    
+
 def moverPersonagem(lado_sai, lado_entra):
     """Função que move os personagem pela ponte."""
     num_escolhas = quantEscolha(lado_sai)
@@ -46,31 +43,22 @@ def moverPersonagem(lado_sai, lado_entra):
 
     if num_escolhas == 1:
         p1 = choice(lado_sai)
-
-        print(testar_movimento([p1]))
-
         lado_sai.remove(p1)
         lado_entra.append(p1)
         print('Personagem escolhido: ', p1)
 
         alterarTempo(p1)
-
-        pegar_movimentos([p1])
     else:
         p1 = choice(lado_sai)
         lado_sai.remove(p1)
         p2 = choice(lado_sai)
         lado_sai.remove(p2)
-
-        print(testar_movimento([p1, p2]))
-
         lado_entra.append(p1)
         lado_entra.append(p2)
         print('Personagens escolhidos: ', p1, ' e ', p2)
 
         alterarTempo(p1, p2)
-
-        pegar_movimentos(sorted([p1, p2]))
+        global num_movimento += 1
 
     return (sorted(lado_sai), sorted(lado_entra))
 
@@ -83,6 +71,8 @@ def reiniciarJogo():
     tempo_lamp = 30
     lado_A = [1, 3, 6, 8, 12]
     lado_B = []
+
+ def checaTentativas():
 
 # Laço onde o jogo irá ocorrer
 while True:
@@ -104,15 +94,16 @@ while True:
         sleep(1)
 
     if tempo_lamp <= 0:
+        print('Tempo: ', tempo_lamp)
         reiniciarJogo()
-        tentativas += 1
+        num_tentativas += 1
         print('----------Jogo Reiniciado!----------')
-        print('Numero de tentativas: %d' % tentativas)
+        print('Numero de tentativas: %d' % num_tentativas)
 
 
     if tempo_lamp >= 0 and lado_A == []:
         tempo_decorrido = time() - tempo_decorrido
         print('\n\n----------FIM DO JOGO!----------')
-        print('Numero de tentativas: %d' % tentativas)
+        print('Numero de tentativas: %d' % num_tentativas)
         print('O tempo decorrido foi de %.2f segundos' % tempo_decorrido)
         break
