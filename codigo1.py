@@ -10,7 +10,13 @@ lado_A = [1, 3, 6, 8, 12]  # Lado onde estão as pesssoas
 lado_B = []  # Lado para onde as pesoas vão
 tentativas = 0 # Contador de tentativas até resolver
 tempo_decorrido = time() # Registra o tempo inicial
-lista_movimentos = []
+lista_movimentos = [] # Lista que irá armazenar todos os movimentos da máquina
+
+"""Função anônima que salva em uma lista os movimentos da máquina."""
+pegar_movimentos = lambda movimento: lista_movimentos.append(movimento)
+
+"""Função anônima para testar se o movimento já foi feito."""
+testar_movimento = lambda movimento: True if movimento in lista_movimentos else False
 
 def alterarTempo(p1, p2=0):
     """ Função que altera o tempo baseando-se no personagem
@@ -31,13 +37,7 @@ def quantEscolha(lado):
         num_escolhas =  randint(1, 2)
 
     return num_escolhas
-
-def pegar_movimentos(movimento):
-    """Função que salva em uma lista os movimentos da máquina."""
-    global lista_movimentos
-    lista_movimentos.append(movimento)
-
-
+    
 def moverPersonagem(lado_sai, lado_entra):
     """Função que move os personagem pela ponte."""
     num_escolhas = quantEscolha(lado_sai)
@@ -46,6 +46,9 @@ def moverPersonagem(lado_sai, lado_entra):
 
     if num_escolhas == 1:
         p1 = choice(lado_sai)
+
+        print(testar_movimento([p1]))
+
         lado_sai.remove(p1)
         lado_entra.append(p1)
         print('Personagem escolhido: ', p1)
@@ -58,13 +61,16 @@ def moverPersonagem(lado_sai, lado_entra):
         lado_sai.remove(p1)
         p2 = choice(lado_sai)
         lado_sai.remove(p2)
+
+        print(testar_movimento([p1, p2]))
+
         lado_entra.append(p1)
         lado_entra.append(p2)
         print('Personagens escolhidos: ', p1, ' e ', p2)
 
         alterarTempo(p1, p2)
 
-        pegar_movimentos([p1, p2])
+        pegar_movimentos(sorted([p1, p2]))
 
     return (sorted(lado_sai), sorted(lado_entra))
 
