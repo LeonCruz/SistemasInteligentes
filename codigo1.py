@@ -18,7 +18,7 @@ ganhou = False #Verifica se ganhou
 def alterarTempo(p1, p2=0):
     """ Função que altera o tempo baseando-se no personagem
         de maior custo."""
-   global tempo_lamp
+    global tempo_lamp
 
     if p1 > p2:
         tempo_lamp -= p1
@@ -58,7 +58,8 @@ def moverPersonagem(lado_sai, lado_entra):
         print('Personagens escolhidos: ', p1, ' e ', p2)
 
         alterarTempo(p1, p2)
-        global num_movimento += 1
+        global num_movimento
+        num_movimento += 1
 
     return (sorted(lado_sai), sorted(lado_entra))
 
@@ -72,26 +73,27 @@ def reiniciarJogo():
     lado_A = [1, 3, 6, 8, 12]
     lado_B = []
 
- def checaTentativas():
 
 # Laço onde o jogo irá ocorrer
 while True:
     if lado_A != []:
+        print('Tempo Inicial: ', tempo_lamp)
+
+        if tempo_lamp > 0:
+            print('----------Lado A----------')
+            lado_A, lado_B = moverPersonagem(lado_A, lado_B)
+            print('Lado A: {}\nLado B: {}'.format(lado_A, lado_B))
+
+            sleep(1)
+
         print('Tempo: ', tempo_lamp)
 
-        print('----------Lado A----------')
-        lado_A, lado_B = moverPersonagem(lado_A, lado_B)
-        print('Lado A: {}\nLado B: {}'.format(lado_A, lado_B))
+        if tempo_lamp > 0:
+            print('----------Lado B----------')
+            lado_B, lado_A = moverPersonagem(lado_B, lado_A)
+            print('Lado A: {}\nLado B: {}'.format(lado_A, lado_B))
 
-        sleep(1)
-
-        print('Tempo: ', tempo_lamp)
-
-        print('----------Lado B----------')
-        lado_B, lado_A = moverPersonagem(lado_B, lado_A)
-        print('Lado A: {}\nLado B: {}'.format(lado_A, lado_B))
-
-        sleep(1)
+            sleep(1)
 
     if tempo_lamp <= 0:
         print('Tempo: ', tempo_lamp)
