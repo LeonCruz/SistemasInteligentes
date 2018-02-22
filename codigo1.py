@@ -11,7 +11,6 @@ lado_B = []  # Lado para onde as pesoas vão
 num_tentativas = 0 # Contador de tentativas até resolver
 
 tempo_decorrido = time() # Registra o tempo inicial
-ganhou = False #Verifica se ganhou
 
 def alterarTempo(p1, p2=0):
     """ Função que altera o tempo baseando-se no personagem
