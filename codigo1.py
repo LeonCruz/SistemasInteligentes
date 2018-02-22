@@ -70,31 +70,33 @@ def reiniciarJogo():
 
 
 # Laço onde o jogo irá ocorrer
+print('Tempo Inicial: ', tempo_lamp)
+
 while True:
     if lado_A != []:
-        print('Tempo Inicial: ', tempo_lamp)
 
         if tempo_lamp > 0:
             print('----------Lado A----------')
             lado_A, lado_B = moverPersonagem(lado_A, lado_B)
             print('Lado A: {}\nLado B: {}'.format(lado_A, lado_B))
 
-            sleep(1)
+            print('Tempo: ', tempo_lamp)
 
-        print('Tempo: ', tempo_lamp)
+            sleep(1)
 
         if tempo_lamp > 0:
             print('----------Lado B----------')
             lado_B, lado_A = moverPersonagem(lado_B, lado_A)
             print('Lado A: {}\nLado B: {}'.format(lado_A, lado_B))
 
+            print('Tempo: ', tempo_lamp)
+
             sleep(1)
 
-    if tempo_lamp <= 0:
-        print('Tempo: ', tempo_lamp)
-        reiniciarJogo()
-        print('----------Jogo Reiniciado!----------')
-        print('Numero de tentativas: %d' % num_tentativas)
+        if tempo_lamp <= 0:
+            reiniciarJogo()
+            print('----------Jogo Reiniciado!----------')
+            print('Numero de tentativas: %d' % num_tentativas)
 
 
     if tempo_lamp >= 0 and lado_A == []:
