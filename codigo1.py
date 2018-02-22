@@ -10,8 +10,6 @@ lado_A = [1, 3, 6, 8, 12]  # Lado onde estão as pesssoas
 lado_B = []  # Lado para onde as pesoas vão
 num_tentativas = 0 # Contador de tentativas até resolver
 
-num_movimento = 0
-
 tempo_decorrido = time() # Registra o tempo inicial
 ganhou = False #Verifica se ganhou
 
@@ -58,8 +56,6 @@ def moverPersonagem(lado_sai, lado_entra):
         print('Personagens escolhidos: ', p1, ' e ', p2)
 
         alterarTempo(p1, p2)
-        global num_movimento
-        num_movimento += 1
 
     return (sorted(lado_sai), sorted(lado_entra))
 
@@ -98,7 +94,6 @@ while True:
     if tempo_lamp <= 0:
         print('Tempo: ', tempo_lamp)
         reiniciarJogo()
-        num_tentativas += 1
         print('----------Jogo Reiniciado!----------')
         print('Numero de tentativas: %d' % num_tentativas)
 
