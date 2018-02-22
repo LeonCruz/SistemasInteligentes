@@ -82,7 +82,7 @@ while True:
 
             print('Tempo: ', tempo_lamp)
 
-            sleep(1)
+            sleep(0.5)
 
         if tempo_lamp > 0:
             print('----------Lado B----------')
@@ -91,9 +91,10 @@ while True:
 
             print('Tempo: ', tempo_lamp)
 
-            sleep(1)
+            sleep(0.5)
 
         if tempo_lamp <= 0:
+            num_tentativas += 1
             reiniciarJogo()
             print('----------Jogo Reiniciado!----------')
             print('Numero de tentativas: %d' % num_tentativas)
